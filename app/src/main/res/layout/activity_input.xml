@@ -1,89 +1,162 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#000000">
 
+    <!-- Top Navigation Bar -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_height="56dp"
+        android:background="#DC3D3D"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp">
+
+        <TextView android:id="@+id/navHome" android:text="Home" android:textColor="#FFFFFF" android:textSize="16sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="24dp"/>
+        <TextView android:id="@+id/navDetails" android:text="Details" android:textColor="#FFFFFF" android:textSize="16sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="24dp"/>
+        <TextView android:id="@+id/navReport" android:text="Report" android:textColor="#FFFFFF" android:textSize="16sp" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        <View android:layout_width="0dp" android:layout_height="0dp" android:layout_weight="1"/>
+        <ImageView android:id="@+id/navHelp" android:layout_width="28dp" android:layout_height="28dp" android:src="@android:drawable/ic_menu_help" android:contentDescription="Help" app:tint="#FFFFFF"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:padding="24dp">
 
-        <EditText
-            android:id="@+id/etModeOfTransport"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mode of Transport Name (e.g., Gautrain)"
-            android:inputType="text"
-            android:layout_marginBottom="16dp" />
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Transport Type:"
-            android:layout_marginBottom="8dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TRANSPORT USAGE DETAILS"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="24dp"/>
 
-        <Spinner
-            android:id="@+id/spTransportType"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:entries="@array/transport_types"
-            android:layout_marginBottom="16dp" />
+            <!-- Mode of Transport -->
+            <EditText
+                android:id="@+id/etModeOfTransport"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_rounded_input"
+                android:hint="Mode of Transport"
+                android:textColorHint="#888888"
+                android:textColor="#333333"
+                android:paddingHorizontal="20dp"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"
+                android:inputType="text"/>
 
-        <EditText
-            android:id="@+id/etDistance"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Distance Travelled per Day (km)"
-            android:inputType="numberDecimal"
-            android:layout_marginBottom="16dp" />
+            <!-- Distance Travelled -->
+            <EditText
+                android:id="@+id/etDistance"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_rounded_input"
+                android:hint="Distance Travelled per Day (km)"
+                android:textColorHint="#888888"
+                android:textColor="#333333"
+                android:paddingHorizontal="20dp"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"
+                android:inputType="numberDecimal"/>
 
-        <EditText
-            android:id="@+id/etCostPerKm"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Cost per Kilometre (R/km)"
-            android:inputType="numberDecimal"
-            android:layout_marginBottom="16dp" />
+            <!-- Cost per Kilometre -->
+            <EditText
+                android:id="@+id/etCostPerKm"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_rounded_input"
+                android:hint="Cost per Kilometre (R/km)"
+                android:textColorHint="#888888"
+                android:textColor="#333333"
+                android:paddingHorizontal="20dp"
+                android:textSize="14sp"
+                android:layout_marginBottom="16dp"
+                android:inputType="numberDecimal"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Travel Dates:"
-            android:layout_marginBottom="8dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Select Travel Date:"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp"
+                android:paddingStart="4dp"/>
 
-        <!-- Used to select a date range or specific dates -->
-        <DatePicker
-            android:id="@+id/datePickerTravel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:calendarViewShown="true"
-            android:spinnersShown="false"
-            android:layout_marginBottom="24dp"/>
+            <!-- DatePicker required by the rubric -->
+            <DatePicker
+                android:id="@+id/datePickerTravel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:calendarViewShown="false"
+                android:spinnersShown="true"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark"
+                android:layout_marginBottom="16dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="If calculations appear incorrect:\n• Verify all input values.\n• Ensure a travel date has been selected.\n• Confirm that distance and cost are numeric values.\n• Save the calculation before viewing reports."
-            android:textSize="12sp"
-            android:textColor="#666666"
-            android:background="#F0F0F0"
-            android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Transport Type"
+                android:textColor="#33B5E5"
+                android:textSize="14sp"
+                android:layout_marginBottom="8dp"
+                android:paddingStart="4dp"/>
 
-        <Button
-            android:id="@+id/btnCalculateSave"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Calculate &amp; Save"
-            android:layout_marginBottom="8dp" />
+            <!-- Spinner / Dropdown -->
+            <Spinner
+                android:id="@+id/spTransportType"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_rounded_input"
+                android:paddingHorizontal="16dp"
+                android:layout_marginBottom="24dp"/>
 
-        <Button
-            android:id="@+id/btnClear"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Clear"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+            <!-- Troubleshooting Notice Box -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="If calculations appear incorrect:\n• Verify all input values.\n• Ensure a travel date has been selected.\n• Confirm that distance and cost are numeric values.\n• Save the calculation before viewing reports."
+                android:textSize="12sp"
+                android:textColor="#CCCCCC"
+                android:background="#1A1A1A"
+                android:padding="12dp"
+                android:layout_marginBottom="24dp"/>
 
-    </LinearLayout>
-</ScrollView>
+            <!-- Action Buttons -->
+            <Button
+                android:id="@+id/btnCalculateSave"
+                android:layout_width="260dp"
+                android:layout_height="54dp"
+                android:text="Calculate &amp; Save"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_rounded_button"
+                android:layout_marginBottom="16dp"
+                android:stateListAnimator="@null"/>
+
+            <Button
+                android:id="@+id/btnClear"
+                android:layout_width="180dp"
+                android:layout_height="50dp"
+                android:text="Clear"
+                android:textColor="#FFFFFF"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:background="@drawable/bg_rounded_button"
+                android:stateListAnimator="@null"/>
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

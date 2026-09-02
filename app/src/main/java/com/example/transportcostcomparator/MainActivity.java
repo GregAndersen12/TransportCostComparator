@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnStartCalc = findViewById(R.id.btnStartCalc);
-        Button btnListenToMe = findViewById(R.id.btnListenToMe);
+        TextView btnListenToMe = findViewById(R.id.btnListenToMe);
         Button btnExit = findViewById(R.id.btnExit);
 
         // 1. Navigation to Input Screen
