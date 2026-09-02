@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tvResModeOfTransport"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Mode of Transport: "
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:id="@+id/tvResDailyCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Daily Transport Cost: R0.00"
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:id="@+id/tvResMonthlyCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Monthly Transport Cost: R0.00"
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:id="@+id/tvResMonthlyDistance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Monthly Distance Travelled: 0 km"
+        android:textSize="18sp"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:id="@+id/tvResCategory"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cost Category: "
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="12dp" />
+
+    <TextView
+        android:id="@+id/tvResRecommendation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Recommendation: "
+        android:textSize="18sp"
+        android:layout_marginBottom="32dp" />
+
+    <Button
+        android:id="@+id/btnCalcAgain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculate Again"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnResultsExit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Exit"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+</LinearLayout>

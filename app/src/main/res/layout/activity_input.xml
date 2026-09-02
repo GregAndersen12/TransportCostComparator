@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <EditText
+            android:id="@+id/etModeOfTransport"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Mode of Transport Name (e.g., Gautrain)"
+            android:inputType="text"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transport Type:"
+            android:layout_marginBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/spTransportType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:entries="@array/transport_types"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etDistance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Distance Travelled per Day (km)"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="16dp" />
+
+        <EditText
+            android:id="@+id/etCostPerKm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Cost per Kilometre (R/km)"
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select Travel Dates:"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Used to select a date range or specific dates -->
+        <DatePicker
+            android:id="@+id/datePickerTravel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:calendarViewShown="true"
+            android:spinnersShown="false"
+            android:layout_marginBottom="24dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="If calculations appear incorrect:\n• Verify all input values.\n• Ensure a travel date has been selected.\n• Confirm that distance and cost are numeric values.\n• Save the calculation before viewing reports."
+            android:textSize="12sp"
+            android:textColor="#666666"
+            android:background="#F0F0F0"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <Button
+            android:id="@+id/btnCalculateSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calculate &amp; Save"
+            android:layout_marginBottom="8dp" />
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Clear"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+
+    </LinearLayout>
+</ScrollView>

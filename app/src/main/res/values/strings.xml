@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TransportCostComparator</string>
+    <string-array name="transport_types">
+        <item>Private Vehicle</item>
+        <item>Taxi</item>
+        <item>Bus</item>
+        <item>Train</item>
+        <item>Motorcycle</item>
+    </string-array>
 </resources>
+
