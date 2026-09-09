@@ -3,12 +3,11 @@ package com.example.transportcostcomparator;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,8 +19,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button btnStartCalc = findViewById(R.id.btnStartCalc);
-        TextView btnListenToMe = findViewById(R.id.btnListenToMe);
+        Button btnListenToMe = findViewById(R.id.btnListenToMe);
         Button btnExit = findViewById(R.id.btnExit);
+
+        // Top nav bar views
+        TextView navHome = findViewById(R.id.navHome);
+        TextView navDetails = findViewById(R.id.navDetails);
+        TextView navReport = findViewById(R.id.navReport);
+        ImageView navHelp = findViewById(R.id.navHelp);
 
         // 1. Navigation to Input Screen
         btnStartCalc.setOnClickListener(v -> {
@@ -32,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         // 2. Listen to Me Audio Button
         btnListenToMe.setOnClickListener(v -> {
             if (mediaPlayer == null) {
-                // Requires an audio file in res/raw/transport_audio.mp3
                 mediaPlayer = MediaPlayer.create(this, R.raw.transport_audio);
             }
             if (!mediaPlayer.isPlaying()) {
@@ -45,38 +49,21 @@ public class MainActivity extends AppCompatActivity {
 
         // 3. Exit Application
         btnExit.setOnClickListener(v -> {
-            finishAffinity(); // Closes all activities and exits
+            finishAffinity();
         });
-    }
 
-    // 4. Action Bar Navigation Setup
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+        // 4. Top Nav Bar Navigation
+        navHome.setOnClickListener(v ->
+                Toast.makeText(this, "Already on Home Screen", Toast.LENGTH_SHORT).show());
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
+        navDetails.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, DetailsActivity.class)));
 
-        if (id == R.id.nav_home) {
-            Toast.makeText(this, "Already on Home Screen", Toast.LENGTH_SHORT).show();
-            return true;
-        } else if (id == R.id.nav_details) {
-            // Intent intent = new Intent(this, DetailsActivity.class);
-            // startActivity(intent);
-            return true;
-        } else if (id == R.id.nav_reports) {
-            // Intent intent = new Intent(this, ReportsActivity.class);
-            // startActivity(intent);
-            return true;
-        } else if (id == R.id.nav_help) {
-            // Intent intent = new Intent(this, HelpActivity.class);
-            // startActivity(intent);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+        navReport.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, ReportsActivity.class)));
+
+        navHelp.setOnClickListener(v ->
+                startActivity(new Intent(MainActivity.this, HelpActivity.class)));
     }
 
     @Override

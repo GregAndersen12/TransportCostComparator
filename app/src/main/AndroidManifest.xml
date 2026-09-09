@@ -34,6 +34,18 @@
             android:name=".ResultsActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".DetailsActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".HelpActivity"
+            android:exported="false"/>
+
+        <activity
+            android:name=".ReportsActivity"
+            android:exported="false"/>
+
     </application>
 
 </manifest>

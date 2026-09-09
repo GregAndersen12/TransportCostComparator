@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -102,5 +104,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         db.close();
         return null;
+    }
+
+    public List<Transport> getAllReports() {
+        List<Transport> reports = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, null, null, null, null, null, COLUMN_ID + " DESC");
+
+        if (cursor.moveToFirst()) {
+            do {
+                Transport t = new Transport();
+                t.setModeOfTransport(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_MODE)));
+                t.setTransportType(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_TYPE)));
+                t.setDistancePerDay(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_DISTANCE)));
+                t.setCostPerKm(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_COST_PER_KM)));
+                t.setTravelDays(cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_TRAVEL_DAYS)));
+                t.setDailyCost(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_DAILY_COST)));
+                t.setMonthlyCost(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONTHLY_COST)));
+                t.setTotalMonthlyDistance(cursor.getDouble(cursor.getColumnIndexOrThrow(COLUMN_MONTHLY_DISTANCE)));
+                t.setDateCreated(cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_DATE)));
+                reports.add(t);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return reports;
     }
 }

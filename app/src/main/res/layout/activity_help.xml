@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000"
+    android:padding="24dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HELP &amp; INSTRUCTIONS"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginBottom="20dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#CCCCCC"
+            android:textSize="14sp"
+            android:lineSpacingExtra="6dp"
+            android:text="1. CALCULATING COSTS\nGo to Home and tap 'Start Calculation'. Enter your mode of transport, distance travelled per day, and cost per kilometre. Select your travel date using the date picker, then choose a transport type from the dropdown.\n\n2. SAVING A REPORT\nTap 'Calculate &amp; Save' to store your report and view the results. Your report is saved automatically to your device — no internet connection is required.\n\n3. LISTENING TO AUDIO\nOn the Home screen, tap 'Listen to Me' to play a transport-related audio recording.\n\n4. VIEWING SAVED REPORTS\nUse the 'Details' tab to view your saved reports one at a time, or 'Report' to see a summary of all saved reports.\n\n5. NAVIGATING THE APP\nUse the top navigation bar (Home, Details, Report) on any screen to move between sections.\n\nIf calculations appear incorrect:\n• Verify all input values.\n• Ensure a travel date has been selected.\n• Confirm that distance and cost are numeric values.\n• Save the calculation before viewing reports."/>
+
+    </LinearLayout>
+</ScrollView>

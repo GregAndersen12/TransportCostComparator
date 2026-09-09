@@ -3,6 +3,7 @@ package com.example.transportcostcomparator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,7 +31,23 @@ public class ResultsActivity extends AppCompatActivity {
         Button btnCalcAgain = findViewById(R.id.btnCalcAgain);
         Button btnResultsExit = findViewById(R.id.btnResultsExit);
 
-        // a. Retrieve from Database
+        // Top nav bar
+        TextView navHome = findViewById(R.id.navHome);
+        TextView navDetails = findViewById(R.id.navDetails);
+        TextView navReport = findViewById(R.id.navReport);
+        ImageView navHelp = findViewById(R.id.navHelp);
+
+        navHome.setOnClickListener(v -> {
+            startActivity(new Intent(ResultsActivity.this, MainActivity.class));
+            finish();
+        });
+        navDetails.setOnClickListener(v ->
+                startActivity(new Intent(ResultsActivity.this, DetailsActivity.class)));
+        navReport.setOnClickListener(v ->
+                startActivity(new Intent(ResultsActivity.this, ReportsActivity.class)));
+        navHelp.setOnClickListener(v ->
+                startActivity(new Intent(ResultsActivity.this, HelpActivity.class)));
+
         long reportId = getIntent().getLongExtra("REPORT_ID", -1);
         if (reportId != -1) {
             loadReportFromDatabase(reportId);
@@ -43,58 +60,22 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     private void loadReportFromDatabase(long id) {
-        // Assume dbHelper.getReport(id) returns a populated Transport object
         Transport report = dbHelper.getReport(id);
 
         if (report != null) {
             double monthlyCost = report.getMonthlyCost();
 
-            // a. Display Calculation Results
             tvResMode.setText("Mode: " + report.getModeOfTransport() + " (" + report.getTransportType() + ")");
             tvResDailyCost.setText(String.format("Daily Transport Cost: R%.2f", report.getDailyCost()));
             tvResMonthlyCost.setText(String.format("Monthly Transport Cost: R%.2f", monthlyCost));
             tvResMonthlyDistance.setText(String.format("Monthly Distance: %.1f km", report.getTotalMonthlyDistance()));
 
-            // Execute conditional methods
-            String category = determineCostCategory(monthlyCost);
-            String recommendation = determineRecommendation(category);
+            // Step 9 — using Recommendation class instead of inline private methods
+            String category = Recommendation.getCostCategory(monthlyCost);
+            String recommendation = Recommendation.getRecommendation(category);
 
-            // b & c. Display rating and recommendation
             tvResCategory.setText("Cost Category: " + category);
             tvResRecommendation.setText("Recommendation: " + recommendation);
-        }
-    }
-
-    // b. Determine Transport Cost Category (Energy Efficiency Rating Table)
-    private String determineCostCategory(double monthlyCost) {
-        if (monthlyCost < 1000.0) {
-            return "Low Cost";
-        } else if (monthlyCost >= 1000.0 && monthlyCost < 2000.0) { // R1000 - R1999
-            return "Moderate";
-        } else if (monthlyCost >= 2000.0 && monthlyCost < 3000.0) { // R2000 - R2999
-            return "High";
-        } else if (monthlyCost >= 3000.0 && monthlyCost < 5000.0) { // R3000 - R4999
-            return "Very High";
-        } else {
-            return "Excessive"; // R5000 and above
-        }
-    }
-
-    // c. Display Transport Cost Recommendation
-    private String determineRecommendation(String category) {
-        switch (category) {
-            case "Low Cost":
-                return "Continue using your current transport method.";
-            case "Moderate":
-                return "Consider carpooling where possible.";
-            case "High":
-                return "Reduce unnecessary trips and combine errands.";
-            case "Very High":
-                return "Consider public transport for regular commuting.";
-            case "Excessive":
-                return "Immediate action is recommended to reduce transport costs.";
-            default:
-                return "No recommendation available.";
         }
     }
 }

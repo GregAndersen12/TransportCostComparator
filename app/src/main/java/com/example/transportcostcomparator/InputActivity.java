@@ -2,10 +2,13 @@ package com.example.transportcostcomparator;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import java.util.Calendar;
@@ -17,7 +20,7 @@ public class InputActivity extends AppCompatActivity {
     private Spinner spTransportType;
     private DatePicker datePickerTravel;
     private Button btnCalculateSave, btnClear;
-    private DatabaseHelper dbHelper; // Assumes you have created this class
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +37,29 @@ public class InputActivity extends AppCompatActivity {
         btnCalculateSave = findViewById(R.id.btnCalculateSave);
         btnClear = findViewById(R.id.btnClear);
 
+        // Spinner adapter (Step 1)
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
+                this, R.array.transport_types, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spTransportType.setAdapter(adapter);
+
+        // Top nav bar
+        TextView navHome = findViewById(R.id.navHome);
+        TextView navDetails = findViewById(R.id.navDetails);
+        TextView navReport = findViewById(R.id.navReport);
+        ImageView navHelp = findViewById(R.id.navHelp);
+
+        navHome.setOnClickListener(v -> {
+            startActivity(new Intent(InputActivity.this, MainActivity.class));
+            finish();
+        });
+        navDetails.setOnClickListener(v ->
+                startActivity(new Intent(InputActivity.this, DetailsActivity.class)));
+        navReport.setOnClickListener(v ->
+                startActivity(new Intent(InputActivity.this, ReportsActivity.class)));
+        navHelp.setOnClickListener(v ->
+                startActivity(new Intent(InputActivity.this, HelpActivity.class)));
+
         btnCalculateSave.setOnClickListener(v -> handleCalculation());
 
         btnClear.setOnClickListener(v -> {
@@ -49,18 +75,15 @@ public class InputActivity extends AppCompatActivity {
         String costStr = etCostPerKm.getText().toString().trim();
         String type = spTransportType.getSelectedItem().toString();
 
-        // a. Input Validation (Checking for empty fields)
         if (mode.isEmpty() || distanceStr.isEmpty() || costStr.isEmpty()) {
             Toast.makeText(this, "Error: All fields must be filled.", Toast.LENGTH_LONG).show();
             return;
         }
 
         try {
-            // a. Ensure variables contain numeric values
             double distancePerDay = Double.parseDouble(distanceStr);
             double costPerKm = Double.parseDouble(costStr);
 
-            // Determine travel days using DatePicker (Days between today and selected date)
             Calendar today = Calendar.getInstance();
             Calendar selectedDate = Calendar.getInstance();
             selectedDate.set(datePickerTravel.getYear(), datePickerTravel.getMonth(), datePickerTravel.getDayOfMonth());
@@ -73,17 +96,15 @@ public class InputActivity extends AppCompatActivity {
                 return;
             }
 
-            // b. Transport Calculations
-            double dailyCost = distancePerDay * costPerKm;
-            double monthlyCost = dailyCost * travelDays;
-            double monthlyDistance = distancePerDay * travelDays;
+            // Step 10 — using TransportCalculator instead of inline math
+            double dailyCost = TransportCalculator.calculateDailyCost(distancePerDay, costPerKm);
+            double monthlyCost = TransportCalculator.calculateMonthlyCost(dailyCost, travelDays);
+            double monthlyDistance = TransportCalculator.calculateMonthlyDistance(distancePerDay, travelDays);
 
-            // Save to Database (Assuming dbHelper.insertReport returns the new row ID)
             long reportId = dbHelper.insertReport(mode, type, distancePerDay, costPerKm, travelDays, dailyCost, monthlyCost, monthlyDistance);
 
             if (reportId != -1) {
                 Toast.makeText(this, "Report Saved Successfully!", Toast.LENGTH_SHORT).show();
-                // Pass the ID to Results screen to fulfill Q10's "Retrieve from Database" requirement
                 Intent intent = new Intent(InputActivity.this, ResultsActivity.class);
                 intent.putExtra("REPORT_ID", reportId);
                 startActivity(intent);
@@ -92,7 +113,6 @@ public class InputActivity extends AppCompatActivity {
             }
 
         } catch (NumberFormatException e) {
-            // a. Display suitable error message for invalid data
             Toast.makeText(this, "Error: Please enter valid numeric values for Distance and Cost.", Toast.LENGTH_LONG).show();
         }
     }

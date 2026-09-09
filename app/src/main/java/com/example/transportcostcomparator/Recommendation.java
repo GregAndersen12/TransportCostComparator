@@ -1,26 +1,22 @@
 package com.example.transportcostcomparator;
 
 public class Recommendation {
-
-    // Determines the transport cost category using conditional statements
     public static String getCostCategory(double monthlyCost) {
-        if (monthlyCost < 1000.0) {
-            return "Low Cost";
-        } else if (monthlyCost >= 1000.0 && monthlyCost <= 3000.0) {
-            return "Moderate Cost";
-        } else {
-            return "High Cost";
-        }
+        if (monthlyCost < 1000.0) return "Low Cost";
+        else if (monthlyCost < 2000.0) return "Moderate";
+        else if (monthlyCost < 3000.0) return "High";
+        else if (monthlyCost < 5000.0) return "Very High";
+        else return "Excessive";
     }
 
-    // Determines the cost-saving recommendation using conditional statements
-    public static String getRecommendation(double monthlyCost) {
-        if (monthlyCost < 1000.0) {
-            return "Great job keeping costs low. Consider carpooling occasionally to save even more.";
-        } else if (monthlyCost >= 1000.0 && monthlyCost <= 3000.0) {
-            return "Consider purchasing a monthly public transport pass or joining a lift club to reduce expenses.";
-        } else {
-            return "Your transport costs are high. Explore alternative routes, remote work days, or utilizing public rail systems.";
+    public static String getRecommendation(String category) {
+        switch (category) {
+            case "Low Cost": return "Continue using your current transport method.";
+            case "Moderate": return "Consider carpooling where possible.";
+            case "High": return "Reduce unnecessary trips and combine errands.";
+            case "Very High": return "Consider public transport for regular commuting.";
+            case "Excessive": return "Immediate action is recommended to reduce transport costs.";
+            default: return "No recommendation available.";
         }
     }
 }
