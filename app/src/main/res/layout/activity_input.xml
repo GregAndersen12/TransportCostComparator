@@ -95,14 +95,24 @@
                 android:paddingStart="4dp"/>
 
             <!-- DatePicker required by the rubric -->
-            <DatePicker
-                android:id="@+id/datePickerTravel"
+            <!-- DatePicker required by the rubric -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:calendarViewShown="false"
-                android:spinnersShown="true"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark"
-                android:layout_marginBottom="16dp"/>
+                android:background="@drawable/bg_rounded_input"
+                android:padding="4dp"
+                android:layout_marginBottom="16dp">
+
+                <DatePicker
+                    android:id="@+id/datePickerTravel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:datePickerMode="spinner"
+                    android:calendarViewShown="false"
+                    android:spinnersShown="true"
+                    android:theme="@style/ThemeOverlay.AppCompat.Light"/>
+
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"

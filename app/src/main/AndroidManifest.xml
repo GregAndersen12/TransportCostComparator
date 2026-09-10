@@ -7,7 +7,7 @@
         android:label="Transport Cost Comparator"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
+        android:theme="@style/Theme.TransportCostComparator">
 
         <!-- Splash Screen (App entry point) -->
         <activity
